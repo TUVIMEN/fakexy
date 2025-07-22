@@ -4,19 +4,25 @@ Tool for getting results from fakexy.com
 
 # Usage
 
-    fakexy <URL> <COUNT>
+```bash
+fakexy <URL> <COUNT>
+```
 
 outputs json in each line.
 
 fakexy has aggressive cloudflare protection so browser might be necessary to solve captchas. You can then use `--browser` option to get cookies from browser or pass them directly with `--header`. You can also use `--wait` to wait in between requests, although cloudflare seems to trigger only after time of inactivity.
 
-    fakexy 'https://www.fakexy.com/uk-fake-address-generator-south-humberside' 10 --browser firefox --wait 0.8
+```bash
+fakexy 'https://www.fakexy.com/uk-fake-address-generator-south-humberside' 10 --browser firefox --wait 0.8
 
-    fakexy 'https://www.fakexy.com/uk-fake-address-generator-south-humberside' 10 -w 0.2 -H 'Cookie: cf_clearance=LybymVQ3ndsXXwa8Q7fkMWvIEfdr6vzkuZnXVmOnhSI-1753001875-1.2.1.1-8Q.LhRHXQV4EhrUx6j3BvZ7B8AIMjJ2EpdwcNcNToLnOTIVIoaJ1aaKkI4c4Q91.88xR0cyndUbGTuJb2XpjQnBegVi0dekwpfIeo5GbN8PKUzpCvDc9z57yaupYVegaiYVPUn7ONOue5d.ZemaHTR73xGUZYQdRyg3pzGX_pE8_6KfB_XjhAI4vIOClihjXn33bS4dDsE_.Pyd2Kwsb7Pfa3EvAR3Ulw1SZDAqBsfFwQF6NXX7WxwhkqyPPXKoT' -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:140.0) Gecko/20100101 Firefox/140.0'
+fakexy 'https://www.fakexy.com/uk-fake-address-generator-south-humberside' 10 -w 0.2 -H 'Cookie: cf_clearance=LybymVQ3ndsXXwa8Q7fkMWvIEfdr6vzkuZnXVmOnhSI-1753001875-1.2.1.1-8Q.LhRHXQV4EhrUx6j3BvZ7B8AIMjJ2EpdwcNcNToLnOTIVIoaJ1aaKkI4c4Q91.88xR0cyndUbGTuJb2XpjQnBegVi0dekwpfIeo5GbN8PKUzpCvDc9z57yaupYVegaiYVPUn7ONOue5d.ZemaHTR73xGUZYQdRyg3pzGX_pE8_6KfB_XjhAI4vIOClihjXn33bS4dDsE_.Pyd2Kwsb7Pfa3EvAR3Ulw1SZDAqBsfFwQF6NXX7WxwhkqyPPXKoT' -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:140.0) Gecko/20100101 Firefox/140.0'
+```
 
 The tool supports all generators on site as long as they are passed by url.
 
-    fakexy 'https://www.fakexy.com/uk-fake-address-generator-south-humberside' 1
+```bash
+fakexy 'https://www.fakexy.com/uk-fake-address-generator-south-humberside' 1
+```
 
 ```json
 {
@@ -43,7 +49,9 @@ The tool supports all generators on site as long as they are passed by url.
 }
 ```
 
-    fakexy 'https://www.fakexy.com/random-animal-generator' 1
+```bash
+fakexy 'https://www.fakexy.com/random-animal-generator' 1
+```
 
 ```json
 {
@@ -52,7 +60,9 @@ The tool supports all generators on site as long as they are passed by url.
 }
 ```
 
-    fakexy 'https://www.fakexy.com/us-fake-name-generator-mi' 1
+```bash
+fakexy 'https://www.fakexy.com/us-fake-name-generator-mi' 1
+```
 
 ```json
 {
@@ -79,7 +89,9 @@ The tool supports all generators on site as long as they are passed by url.
 }
 ```
 
-    fakexy 'https://www.fakexy.com/fake-creditcard-generator-visa' 1
+```bash
+fakexy 'https://www.fakexy.com/fake-creditcard-generator-visa' 1
+```
 
 ```json
 {
@@ -90,7 +102,9 @@ The tool supports all generators on site as long as they are passed by url.
 }
 ```
 
-    fakexy 'https://www.fakexy.com/fake-zipcode-generator-us' 1
+```bash
+fakexy 'https://www.fakexy.com/fake-zipcode-generator-us' 1
+```
 
 ```json
 {
@@ -100,7 +114,9 @@ The tool supports all generators on site as long as they are passed by url.
 }
 ```
 
-    fakexy 'https://www.fakexy.com/fake-phonenumber-generator-us' 1
+```bash
+fakexy 'https://www.fakexy.com/fake-phonenumber-generator-us' 1
+```
 
 ```json
 {
