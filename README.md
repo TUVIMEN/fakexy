@@ -2,6 +2,12 @@
 
 Tool for getting results from fakexy.com
 
+# Installation
+
+```bash
+pip install fakexy
+```
+
 # Usage
 
 ```bash
