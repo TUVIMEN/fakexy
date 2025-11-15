@@ -23,8 +23,6 @@ classifiers = [
 
   "Operating System :: OS Independent",
 
-  "Framework :: Pytest",
-
   "Programming Language :: Python :: 3",
   "Programming Language :: Python :: 3.8",
   "Programming Language :: Python :: 3.9",
@@ -37,15 +35,6 @@ classifiers = [
 
 [project.urls]
 "Homepage" = "https://github.com/TUVIMEN/fakexy"
-
-[project.optional-dependencies]
-test = [
-    "pytest",
-    "biggusdictus",
-]
-pdf = [
-    "img2pdf"
-]
 
 [tool.setuptools]
 packages = ["fakexy"]
