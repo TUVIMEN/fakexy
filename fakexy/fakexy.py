@@ -2,6 +2,7 @@
 # by Dominik Stanisław Suchora <hexderm@gmail.com>
 # License: GNU GPLv3
 
+from typing import List, Iterator, Callable
 import re
 
 import treerequests
@@ -13,7 +14,7 @@ import requests
 reliq = RQ(cached="True")
 
 
-def section(rq, name):
+def section(rq: reliq, name: str) -> reliq:
     return rq.filter(
         r"""
         * .box-title; h1 .titleh i@e>'"""
@@ -23,7 +24,7 @@ def section(rq, name):
     )
 
 
-def section_address(rq, name=" address generator"):
+def section_address(rq: reliq, name: str = " address generator") -> dict:
     return section(rq, name).json(
         r"""
         tr; {
@@ -40,7 +41,7 @@ def section_address(rq, name=" address generator"):
     )
 
 
-def section_creditcard(rq, name=" Credit Card infomation"):
+def section_creditcard(rq: reliq, name: str = " Credit Card infomation") -> dict:
     return section(rq, name).json(
         r"""
         tr; {
@@ -53,7 +54,7 @@ def section_creditcard(rq, name=" Credit Card infomation"):
     )
 
 
-def section_person(rq, name=" person profile"):
+def section_person(rq: reliq, name: str = " person profile"):
     return section(rq, name).json(
         r"""
         tr; {
@@ -79,13 +80,13 @@ class fakexy:
         )
 
     @staticmethod
-    def _go_through(func, count, maxq=1):
+    def _go_through(func: Callable, count: int, maxq: int = 1) -> Iterator:
         while count > 0:
             q = min(count, maxq)
             yield from func()[:q]
             count -= q
 
-    def _animals_url(self, url):
+    def _animals_url(self, url: str) -> List[dict]:
         rq = self.ses.get_html(url)
 
         return rq.json(
@@ -97,12 +98,12 @@ class fakexy:
         """
         )["r"]
 
-    def animals(self, url, count=8):
+    def animals(self, url: str, count: int = 8) -> Iterator[dict]:
         if url is None:
             url = "https://www.fakexy.com/random-animal-generator?quantity=8"
         return self._go_through(lambda: self._animals_url(url), count, maxq=8)
 
-    def _address_url(self, url):
+    def _address_url(self, url: str) -> List[dict]:
         rq = self.ses.get_html(url)
 
         ret = section_address(rq)
@@ -111,10 +112,10 @@ class fakexy:
 
         return [ret]
 
-    def addresses(self, url, count=1):
+    def addresses(self, url: str, count: int = 1) -> Iterator[dict]:
         return self._go_through(lambda: self._address_url(url), count)
 
-    def _name_url(self, url):
+    def _name_url(self, url: str) -> List[dict]:
         rq = self.ses.get_html(url)
 
         ret = section_person(rq, name=" Name generator")
@@ -123,18 +124,18 @@ class fakexy:
 
         return [ret]
 
-    def names(self, url, count=1):
+    def names(self, url: str, count: int = 1) -> Iterator[dict]:
         return self._go_through(lambda: self._name_url(url), count)
 
-    def _creditcard_url(self, url):
+    def _creditcard_url(self, url: str) -> List[dict]:
         rq = self.ses.get_html(url)
 
         return [section_creditcard(rq, name="Creditcard generator")]
 
-    def creditcards(self, url, count=1):
+    def creditcards(self, url: str, count: int = 1) -> Iterator[dict]:
         return self._go_through(lambda: self._creditcard_url(url), count)
 
-    def _phones_url(self, url):
+    def _phones_url(self, url: str) -> List[dict]:
         rq = self.ses.get_html(url)
 
         return section(rq, " number generator").json(
@@ -149,10 +150,10 @@ class fakexy:
         """
         )["r"]
 
-    def phones(self, url, count=12):
+    def phones(self, url: str, count: int = 12) -> Iterator[dict]:
         return self._go_through(lambda: self._phones_url(url), count, maxq=12)
 
-    def _zipcodes_url(self, url):
+    def _zipcodes_url(self, url: str) -> List[dict]:
         rq = self.ses.get_html(url)
 
         return section(rq, " Zipcode generator").json(
@@ -167,10 +168,10 @@ class fakexy:
         """
         )["r"]
 
-    def zipcodes(self, url, count=12):
+    def zipcodes(self, url: str, count: int = 12) -> Iterator[dict]:
         return self._go_through(lambda: self._zipcodes_url(url), count, maxq=12)
 
-    def guess(self, url, count=1):
+    def guess(self, url: str, count: int = 1) -> Iterator[dict]:
         def err():
             raise KeyError("url '{}' doesn't match to anything".format(url))
 
