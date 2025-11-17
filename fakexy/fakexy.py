@@ -93,7 +93,7 @@ class fakexy:
             r"""
             .r * .container; * .grid child@; div .flex child@; {
                 .name [0] div .text-center | "%Dt",
-                .image.U [0] img | "%(src)v"
+                .image.U [0] img | "%(data-src)v"
             } |
         """
         )["r"]
