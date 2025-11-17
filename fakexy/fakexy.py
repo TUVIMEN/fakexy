@@ -80,12 +80,10 @@ class fakexy:
 
     @staticmethod
     def _go_through(func, count, maxq=1):
-        ret = []
         while count > 0:
             q = min(count, maxq)
-            ret += func()[:q]
+            yield from func()[:q]
             count -= q
-        return ret
 
     def _animals_url(self, url):
         rq = self.ses.get_html(url)
