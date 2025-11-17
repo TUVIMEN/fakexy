@@ -10,6 +10,8 @@ pip install fakexy
 
 # Usage
 
+## CLI
+
 ```bash
 fakexy <URL> <COUNT>
 ```
@@ -131,3 +133,28 @@ fakexy 'https://www.fakexy.com/fake-phonenumber-generator-us' 1
   "city": "Austin"
 }
 ```
+
+## Library
+
+### Code
+
+```python
+from fakexy import fakexy
+import requests
+
+fxy = fakexy(wait=1.2,browser="firefox")
+
+try:
+    for i in fxy.guess(r'https://www.fakexy.com/fake-address-generator-de', count=80):
+        print(i)
+except requests.RequestException:
+    pass
+```
+
+### Methods
+
+`animals`, `addresses`, `names`, `creditcards`, `phones` and `zipcodes` methods take `url` to resource and optionally `count` of elements to return through generator. `count` can be arbitrarily large since it'll split into multiple api calls.
+
+Resources fall into many categories and i didn't bother with creating a complete list of them, that's why all of these functions take `url`, if you need something just find it on the site.
+
+All of the aforementioned methods can be replaced by calling `guess` which takes the same arguments, but also discerns which of them to call based on it, returning their ourput.
